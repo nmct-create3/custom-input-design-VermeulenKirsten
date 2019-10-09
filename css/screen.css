@@ -20,6 +20,7 @@
 
 :root {
   /* colors */
+  --global-color-alpha-x-light: #81adf0;
   --global-color-alpha-light: #4f95ff;
   --global-color-alpha: #3385ff;
   --global-color-alpha-dark: #2e77e6;
@@ -751,14 +752,34 @@ input::placeholder {
 .c-custom-toggle {
   display: flex;
   align-items: center;
+  margin-right: 16px;
+}
+
+.c-custom-toggle--inverted {
+  margin-right: 0;
+  width: 100%;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.c-toggle-list__item {
+  margin-bottom: calc(var(--global-baseline) * 1.5);
+}
+
+.c-toggle-list__item + .c-toggle-list__item {
+  padding-top: 12px;
+  border-top: var(--global-borderWidth) solid var(--global-input-borderColor);
 }
 
 .c-custom-toggle__fake-input {
-  display: block;
+  display: flex;
+  align-items: center;
   width: 48px;
   height: 24px;
   border-radius: 24px;
   border: var(--global-borderWidth) solid var(--global-input-borderColor);
+  background-color: var(--global-color-neutral-xxxx-light);
+  transition: all var(--global-transitionTiming-alpha);
   margin-right: var(--global-whitespace-sm);
 }
 
@@ -768,7 +789,57 @@ input::placeholder {
   width: 22px;
   height: 22px;
   border-radius: 24px;
-  border: var(--global-borderWidth) solid var(--global-input-borderColor);
+  background-color: white;
+  box-shadow: 1px 0px 3px 0px rgba(0, 0, 0, 0.16);
+  transition: all var(--global-transitionTiming-alpha);
+}
+
+.c-custom-toggle--inverted .c-custom-toggle__fake-input {
+  margin-right: 0;
+}
+
+.c-option--hidden:checked + .c-custom-toggle .c-custom-toggle__fake-input {
+  justify-content: flex-end;
+}
+
+.c-option--hidden:checked + .c-custom-toggle .c-custom-toggle__fake-input {
+  background-color: var(--global-color-alpha);
+  border: var(--global-borderWidth) solid var(--global-color-alpha-dark);
+}
+
+.c-option--hidden:active + .c-custom-toggle .c-custom-toggle__fake-input,
+.c-option--hidden:focus + .c-custom-toggle .c-custom-toggle__fake-input {
+  border: var(--global-borderWidth) solid var(--global-color-alpha-x-light);
+  box-shadow: var(--global-input-boxShadow);
+}
+
+.c-option--hidden:active + .c-custom-toggle .c-custom-toggle__fake-input,
+.c-option--hidden:checked:focus + .c-custom-toggle .c-custom-toggle__fake-input {
+  border: var(--global-borderWidth) solid var(--global-color-alpha-dark);
+  box-shadow: var(--global-input-boxShadow);
+}
+
+/* Animation */
+
+.c-option--hidden:active + .c-custom-toggle .c-custom-toggle__fake-input::after {
+  width: 28px;
+}
+
+/* Select */
+
+.c-custom-select {
+  display: block;
+  position: relative;
+}
+
+.c-custom-select__symbol {
+  width: 24px;
+  height: 24px;
+  fill: var(--global-color-neutral-x-light);
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  pointer-events: none;
 }
 
 /*------------------------------------*\
